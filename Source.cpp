@@ -1,8 +1,8 @@
-#include <nlopt.hpp>
 #include <iostream>
-#include <nlopt.h>
+#include <../include/nlopt.h>
 #include <iomanip>
 #include <cmath>
+#include <../include/nlopt.hpp>
 
 using namespace std;
 double myfunc(const vector<double>& x, vector<double>& grad, void* my_func_data);
