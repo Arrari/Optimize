@@ -2,7 +2,7 @@
 #include <iostream>
 #include <nlopt.h>
 #include <iomanip>
-#include <cm>
+#include <cmath>
 
 double myfunc(const std::vector<double>& x, std::vector<double>& grad, void* my_func_data);
 
@@ -10,7 +10,7 @@ void multi_constraint(unsigned m, double* result, unsigned n, const double* x, d
 
 int main()
 {
-    nlopt::opt opt(nlopt::LD_SLSQP, 2);
+    nlopt::opt opt(nlopt::LD_LBFGS, 0.00000001);
     std::vector<double> lb(2);
     lb[0] = -HUGE_VAL;   //HUGE_VAL is a C++ constant
     lb[1] = 0;
