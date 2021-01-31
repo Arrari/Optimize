@@ -42,9 +42,10 @@ double myfunc(const vector<double>& x, vector<double>& grad, void* my_func_data)
 {
     if (!grad.empty()) {
         grad[0] = 0.0;
-        grad[1] = 0.5 / sqrt(x[1]);
+        grad[1] = (-400 * x[1] * (x[2] - x[1] * x[1]) - 2 * (1 - x[1]));
+        grad[2] = (200 * (x[2] - x[1] * x[1]));
     }
-    return sqrt(x[1]);
+    return (100*(x[2] - x[1] * x[1]) ^ 2 + (1 - x[1]) ^ 2);
 }
 
 void multi_constraint(unsigned m, double* result, unsigned n, const double* x, double* grad, void* f_data)
