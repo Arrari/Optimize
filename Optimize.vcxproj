@@ -156,6 +156,10 @@
     <None Include="x64\nlopt.dll" />
     <None Include="x64\nlopt.exp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="nlopt.h" />
+    <ClInclude Include="nlopt.hpp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
