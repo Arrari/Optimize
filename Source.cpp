@@ -4,14 +4,15 @@
 #include <iomanip>
 #include <cmath>
 
-double myfunc(const std::vector<double>& x, std::vector<double>& grad, void* my_func_data);
+using namespace std;
+double myfunc(const vector<double>& x, vector<double>& grad, void* my_func_data);
 
 void multi_constraint(unsigned m, double* result, unsigned n, const double* x, double* grad, void* f_data);
 
 int main()
 {
-    nlopt::opt opt(nlopt::LD_LBFGS, 0.00000001);
-    std::vector<double> lb(2);
+    nlopt::opt opt(nlopt::LD_LBFGS, 2);
+    vector<double> lb(2);
     lb[0] = -HUGE_VAL;   //HUGE_VAL is a C++ constant
     lb[1] = 0;
     opt.set_lower_bounds(lb);
@@ -19,23 +20,23 @@ int main()
     opt.set_min_objective(myfunc, NULL);
 
     double data[4] = { 2,0,-1,1 };   //use one dimensional array
-    std::vector<double> tol_constraint(2);
+    vector<double> tol_constraint(2);
     tol_constraint[0] = 1e-8;
     tol_constraint[1] = 1e-8;
     opt.add_inequality_mconstraint(multi_constraint, data, tol_constraint);
-    opt.set_xtol_rel(1e-4);
+    opt.set_xtol_rel(1e-7);
 
-    std::vector<double> x(2);
+    vector<double> x(2);
     x[0] = 1.234;
     x[1] = 5.678;
     double minf;
     nlopt::result result = opt.optimize(x, minf);
-    std::cout << "The result is" << std::endl;
-    std::cout << result << std::endl;
-    std::cout << "Minimal function value " << minf << std::endl;
+    cout << "The result is" << endl;
+    cout << result << endl;
+    cout << "Minimal function value " << minf << endl;
 }
 
-double myfunc(const std::vector<double>& x, std::vector<double>& grad, void* my_func_data)
+double myfunc(const vector<double>& x, vector<double>& grad, void* my_func_data)
 {
     if (!grad.empty()) {
         grad[0] = 0.0;
